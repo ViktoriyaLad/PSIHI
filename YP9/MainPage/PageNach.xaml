@@ -1,0 +1,19 @@
+﻿<Page x:Class="YP9.MainPage.PageNach"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:YP9.MainPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageNach">
+
+    <Grid>
+        <Canvas>
+            <Button x:Name="Zapis" Content="Список записей" Click="Zapis_Click"  Canvas.Left="292" Canvas.Top="96" Height="66" Width="216" FontSize="22" BorderBrush="#FFFFD8F1" Background="#FFFFD8F1" />
+            <Button x:Name="Klient" Content="Список клиентов" Click="Klient_Click"  Canvas.Left="293" Canvas.Top="207" Height="66" Width="215" FontSize="22" BorderBrush="#FFFFD8F1" Background="#FFFFD8F1" HorizontalAlignment="Center" VerticalAlignment="Top" />
+            <Button x:Name="Vrach" Content="Список врачей" Click="Vrach_Click"  Canvas.Left="293" Canvas.Top="318" Height="66" Width="215" FontSize="22" BorderBrush="#FFFFD8F1" Background="#FFFFD8F1" />
+
+        </Canvas>
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eb8e910cc39f43c7baf108cfcf020d5a" Name="Diagram1">
+        <EntityTypeShape EntityType="hospitalModel.Client_list" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="hospitalModel.List_of_doctors" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hospitalModel.List_of_entries" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="hospitalModel.FK_List_of_entries_Client_list" ManuallyRouted="false" />
+        <AssociationConnector Association="hospitalModel.FK_List_of_entries_List_of_doctors" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

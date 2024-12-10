@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище hospitalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client list">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="List of doctors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" Nullable="false" />
+          <Property Name="Cabinet" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="List of entries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RecordingDate" Type="date" Nullable="false" />
+          <Property Name="IDClientList" Type="int" Nullable="false" />
+          <Property Name="IDListOfDoctors" Type="int" Nullable="false" />
+          <Property Name="Cabinet" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_List of entries_Client list">
+          <End Role="Client list" Type="Self.Client list" Multiplicity="1" />
+          <End Role="List of entries" Type="Self.List of entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client list">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List of entries">
+              <PropertyRef Name="IDClientList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List of entries_List of doctors">
+          <End Role="List of doctors" Type="Self.List of doctors" Multiplicity="1" />
+          <End Role="List of entries" Type="Self.List of entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="List of doctors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List of entries">
+              <PropertyRef Name="IDListOfDoctors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище hospitalModelContainer">
+          <EntitySet Name="Client list" EntityType="Self.Client list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List of doctors" EntityType="Self.List of doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="List of entries" EntityType="Self.List of entries" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_List of entries_Client list" Association="Self.FK_List of entries_Client list">
+            <End Role="Client list" EntitySet="Client list" />
+            <End Role="List of entries" EntitySet="List of entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List of entries_List of doctors" Association="Self.FK_List of entries_List of doctors">
+            <End Role="List of doctors" EntitySet="List of doctors" />
+            <End Role="List of entries" EntitySet="List of entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hospitalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client_list">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="List_of_entries" Relationship="Self.FK_List_of_entries_Client_list" FromRole="Client_list" ToRole="List_of_entries" />
+        </EntityType>
+        <EntityType Name="List_of_doctors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="Cabinet" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="List_of_entries" Relationship="Self.FK_List_of_entries_List_of_doctors" FromRole="List_of_doctors" ToRole="List_of_entries" />
+        </EntityType>
+        <EntityType Name="List_of_entries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RecordingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IDClientList" Type="Int32" Nullable="false" />
+          <Property Name="IDListOfDoctors" Type="Int32" Nullable="false" />
+          <Property Name="Cabinet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client_list" Relationship="Self.FK_List_of_entries_Client_list" FromRole="List_of_entries" ToRole="Client_list" />
+          <NavigationProperty Name="List_of_doctors" Relationship="Self.FK_List_of_entries_List_of_doctors" FromRole="List_of_entries" ToRole="List_of_doctors" />
+        </EntityType>
+        <Association Name="FK_List_of_entries_Client_list">
+          <End Role="Client_list" Type="Self.Client_list" Multiplicity="1" />
+          <End Role="List_of_entries" Type="Self.List_of_entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client_list">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List_of_entries">
+              <PropertyRef Name="IDClientList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_List_of_entries_List_of_doctors">
+          <End Role="List_of_doctors" Type="Self.List_of_doctors" Multiplicity="1" />
+          <End Role="List_of_entries" Type="Self.List_of_entries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="List_of_doctors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="List_of_entries">
+              <PropertyRef Name="IDListOfDoctors" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hospitalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client_list" EntityType="Self.Client_list" />
+          <EntitySet Name="List_of_doctors" EntityType="Self.List_of_doctors" />
+          <EntitySet Name="List_of_entries" EntityType="Self.List_of_entries" />
+          <AssociationSet Name="FK_List_of_entries_Client_list" Association="Self.FK_List_of_entries_Client_list">
+            <End Role="Client_list" EntitySet="Client_list" />
+            <End Role="List_of_entries" EntitySet="List_of_entries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_List_of_entries_List_of_doctors" Association="Self.FK_List_of_entries_List_of_doctors">
+            <End Role="List_of_doctors" EntitySet="List_of_doctors" />
+            <End Role="List_of_entries" EntitySet="List_of_entries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище hospitalModelContainer" CdmEntityContainer="hospitalEntities">
+          <EntitySetMapping Name="Client_list">
+            <EntityTypeMapping TypeName="hospitalModel.Client_list">
+              <MappingFragment StoreEntitySet="Client list">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List_of_doctors">
+            <EntityTypeMapping TypeName="hospitalModel.List_of_doctors">
+              <MappingFragment StoreEntitySet="List of doctors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Otchestvo" ColumnName="Otchestvo" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Cabinet" ColumnName="Cabinet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="List_of_entries">
+            <EntityTypeMapping TypeName="hospitalModel.List_of_entries">
+              <MappingFragment StoreEntitySet="List of entries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+                <ScalarProperty Name="IDClientList" ColumnName="IDClientList" />
+                <ScalarProperty Name="IDListOfDoctors" ColumnName="IDListOfDoctors" />
+                <ScalarProperty Name="Cabinet" ColumnName="Cabinet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
